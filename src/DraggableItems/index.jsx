@@ -26,6 +26,7 @@ const DraggableItems = () => {
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
+    if (!over) return;
 
     const getOverIndex = () => {
       for (let i = 0; i < items.length; i++) {

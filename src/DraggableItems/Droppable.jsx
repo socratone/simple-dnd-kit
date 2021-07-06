@@ -7,24 +7,29 @@ const Droppable = ({ id, children }) => {
   });
 
   return (
-    <Container
-      ref={setNodeRef}
-      style={{
-        border: isOver ? '5px solid black' : undefined,
-      }}
-    >
+    <Container ref={setNodeRef}>
       {children}
+      {isOver && <Line />}
     </Container>
   );
 };
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100px;
   height: 100px;
   box-sizing: border-box;
+`;
+
+const Line = styled.div`
+  width: 5px;
+  height: 100%;
+  background: black;
+  position: absolute;
+  left: -3px;
 `;
 
 export default Droppable;

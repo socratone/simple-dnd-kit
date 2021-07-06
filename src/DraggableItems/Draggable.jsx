@@ -8,6 +8,7 @@ const Draggable = ({ id, color, children }) => {
   const style = transform
     ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        zIndex: transform ? 100 : 1, // active된 draggable z-index를 최상으로 변경
       }
     : undefined;
 
