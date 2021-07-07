@@ -12,3 +12,7 @@ dnd-kit은 리액트에서 드래그 앤 드롭을 가능하게 해주는 라이
 ## Draggable Items
 
 드래그 앤 드롭으로 item들의 위치를 변경할 수 있도록 구현했습니다.
+
+## Advanced Draggable Items
+
+Draggable Items를 실무에서도 쓸 수 있도록 UX를 고려해서 구현했습니다.
