@@ -28,31 +28,19 @@ const DraggableItems = () => {
     const { active, over } = event;
     if (!over) return;
 
-    const getOverIndex = () => {
-      for (let i = 0; i < items.length; i++) {
-        if (items[i].id === over.id) {
-          return i;
-        }
-      }
-    };
-
     const movedItem = items.find((item) => active.id === item.id);
     const newItems = items.slice();
 
     // 배열에 먼저 추가한다.
-    const overIndex = getOverIndex();
+    const overIndex = items.findIndex((item) => item.id === over.id);
     newItems.splice(overIndex, 0, movedItem);
 
     // 원본을 지운다.
-    let originalIndex;
-    for (let i = 0; i < newItems.length; i++) {
-      // 새로 추가한 곳은 지나친다.
-      if (i === overIndex) continue;
-      if (newItems[i].id === movedItem.id) {
-        originalIndex = i;
-        break;
-      }
-    }
+    const originalIndex = newItems.findIndex((item, index) => {
+      if (index === overIndex) return false;
+      if (item.id === movedItem.id) return true;
+      return false;
+    });
     newItems.splice(originalIndex, 1);
 
     setItems(newItems);
