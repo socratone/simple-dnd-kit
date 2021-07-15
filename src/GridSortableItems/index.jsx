@@ -11,13 +11,13 @@ import {
   arrayMove,
   SortableContext,
   sortableKeyboardCoordinates,
-  horizontalListSortingStrategy,
+  rectSortingStrategy,
 } from '@dnd-kit/sortable';
 import styled from 'styled-components';
 import Item from './Item';
 
-const SortableItems = () => {
-  const [items, setItems] = useState(['1', '2', '3', '4']);
+const GridSortableItems = () => {
+  const [items, setItems] = useState(['1', '2', '3', '4', '5', '6', '7', '8', '9']);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -26,13 +26,13 @@ const SortableItems = () => {
   );
 
   return (
-    <Flex>
+    <Grid>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
-        <SortableContext items={items} strategy={horizontalListSortingStrategy}>
+        <SortableContext items={items} strategy={rectSortingStrategy}>
           {items.map((id) => (
             <Item key={id} id={id}>
               {id}
@@ -40,7 +40,7 @@ const SortableItems = () => {
           ))}
         </SortableContext>
       </DndContext>
-    </Flex>
+    </Grid>
   );
 
   function handleDragEnd(event) {
@@ -57,9 +57,10 @@ const SortableItems = () => {
   }
 };
 
-const Flex = styled.section`
-  display: flex;
+const Grid = styled.div`
+  display: inline-grid;
   gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
 `
 
-export default SortableItems;
+export default GridSortableItems;

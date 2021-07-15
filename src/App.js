@@ -3,6 +3,7 @@ import Basic from './Basic';
 import DraggableItems from './DraggableItems';
 import AdvanceDraggableItems from './AdvancedDraggableItems';
 import SortableItems from './SortableItems';
+import GridSortableItems from './GridSortableItems';
 
 function App() {
   return (
@@ -13,8 +14,10 @@ function App() {
       <DraggableItems />
       <h2>Advanced Draggable Items</h2>
       <AdvanceDraggableItems />
-      <h2>Sortable Preset</h2>
+      <h2>Flex Sortable Preset</h2>
       <SortableItems />
+      <h2>Grid Sortable Preset</h2>
+      <GridSortableItems />
     </div>
   );
 }
