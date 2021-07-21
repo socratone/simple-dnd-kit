@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
-const Item = ({ id, children }) => {
+const SortableItem = ({ id, children }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
 
@@ -31,4 +31,4 @@ const Container = styled.span`
   align-items: center;
 `;
 
-export default Item;
+export default SortableItem;

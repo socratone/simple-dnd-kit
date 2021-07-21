@@ -14,10 +14,20 @@ import {
   rectSortingStrategy,
 } from '@dnd-kit/sortable';
 import styled from 'styled-components';
-import Item from './Item';
+import SortableItem from './SortableItem';
 
 const GridSortableItems = () => {
-  const [items, setItems] = useState(['1', '2', '3', '4', '5', '6', '7', '8', '9']);
+  const [items, setItems] = useState([
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+  ]);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -25,25 +35,7 @@ const GridSortableItems = () => {
     })
   );
 
-  return (
-    <Grid>
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <SortableContext items={items} strategy={rectSortingStrategy}>
-          {items.map((id) => (
-            <Item key={id} id={id}>
-              {id}
-            </Item>
-          ))}
-        </SortableContext>
-      </DndContext>
-    </Grid>
-  );
-
-  function handleDragEnd(event) {
+  const handleDragEnd = (event) => {
     const { active, over } = event;
 
     if (active.id !== over.id) {
@@ -54,13 +46,31 @@ const GridSortableItems = () => {
         return arrayMove(items, oldIndex, newIndex);
       });
     }
-  }
+  };
+
+  return (
+    <Grid>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext items={items} strategy={rectSortingStrategy}>
+          {items.map((id) => (
+            <SortableItem key={id} id={id}>
+              {id}
+            </SortableItem>
+          ))}
+        </SortableContext>
+      </DndContext>
+    </Grid>
+  );
 };
 
 const Grid = styled.div`
   display: inline-grid;
   gap: 10px;
   grid-template-columns: repeat(3, 1fr);
-`
+`;
 
 export default GridSortableItems;

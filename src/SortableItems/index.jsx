@@ -14,7 +14,7 @@ import {
   horizontalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import styled from 'styled-components';
-import Item from './Item';
+import SortableItem from './SortableItem';
 
 const SortableItems = () => {
   const [items, setItems] = useState(['1', '2', '3', '4']);
@@ -25,25 +25,7 @@ const SortableItems = () => {
     })
   );
 
-  return (
-    <Flex>
-      <DndContext
-        sensors={sensors}
-        collisionDetection={closestCenter}
-        onDragEnd={handleDragEnd}
-      >
-        <SortableContext items={items} strategy={horizontalListSortingStrategy}>
-          {items.map((id) => (
-            <Item key={id} id={id}>
-              {id}
-            </Item>
-          ))}
-        </SortableContext>
-      </DndContext>
-    </Flex>
-  );
-
-  function handleDragEnd(event) {
+  const handleDragEnd = (event) => {
     const { active, over } = event;
 
     if (active.id !== over.id) {
@@ -54,12 +36,30 @@ const SortableItems = () => {
         return arrayMove(items, oldIndex, newIndex);
       });
     }
-  }
+  };
+
+  return (
+    <Flex>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext items={items} strategy={horizontalListSortingStrategy}>
+          {items.map((id) => (
+            <SortableItem key={id} id={id}>
+              {id}
+            </SortableItem>
+          ))}
+        </SortableContext>
+      </DndContext>
+    </Flex>
+  );
 };
 
 const Flex = styled.section`
   display: flex;
   gap: 10px;
-`
+`;
 
 export default SortableItems;
