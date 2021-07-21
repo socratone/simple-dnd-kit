@@ -55,6 +55,7 @@ const GridSortableItems = () => {
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
       >
+        {/* items prop에는 id: string 배열이 들어가야 한다. */}
         <SortableContext items={items} strategy={rectSortingStrategy}>
           {items.map((id) => (
             <SortableItem key={id} id={id}>
